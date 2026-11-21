@@ -142,21 +142,16 @@ a:hover {
 .start-container {
   position: relative;
   z-index: 20;
-  width: min(1180px, 100%);
+  display: grid;
+  align-items: center;
+  width: min(760px, 100%);
+  min-height: 100vh;
   margin: 0 auto;
-  padding: 20px 16px;
+  padding: 24px 16px;
   box-sizing: border-box;
 }
 
-.start-container > div:first-child {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
-  gap: 20px;
-  align-items: stretch;
-}
-
-.start-container > div:first-child > div:first-child,
-.start-container > div:first-child > div:last-child {
+.start-card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-card);
@@ -167,8 +162,7 @@ a:hover {
 }
 
 /* pink edge glow on cards */
-.start-container > div:first-child > div:first-child::before,
-.start-container > div:first-child > div:last-child::before {
+.start-card::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -177,19 +171,12 @@ a:hover {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
-.start-container > div:first-child > div:first-child {
+.start-card {
   padding: 32px;
 }
 
-.start-container > div:first-child > div:last-child {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  padding: 24px;
-}
-
 /* ─── Typography ─────────────────────────────────────────────── */
-.start-container h1 {
+.start-card h1 {
   margin: 16px 0 10px;
   font-size: clamp(2.2rem, 4.8vw, 4.2rem);
   line-height: 0.95;
@@ -199,15 +186,16 @@ a:hover {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  text-align: center;
 }
 
-.start-container > div:first-child > div:first-child > p {
+.start-card > p {
   max-width: 38rem;
-  margin: 0 0 22px;
+  margin: 0 auto 22px;
   font-size: 1rem;
   line-height: 1.75;
   color: var(--text-2);
-  text-align: left;
+  text-align: center;
 }
 
 /* ─── Setup overlay ──────────────────────────────────────────── */
@@ -240,8 +228,7 @@ a:hover {
 /* Native <select> (keyboard, screen readers and the mobile picker for free),
    restyled to match the cyan file picker. The icons sit on top
    with pointer-events off, so a click anywhere opens the select. */
-/* A row of its own above .start-container (top right of the viewport). It
-   must stay outside it: .start-container > div:first-child is the card grid. */
+/* Keep the language picker outside the centered setup card. */
 .lang-switcher {
   position: relative;
   z-index: 20;
@@ -763,14 +750,7 @@ body.gameIsStarted .lang-switcher {
   color: var(--text-3);
 }
 
-/* ─── Bottom info panels (right column) ─────────────────────── */
-.start-container > div:first-child > div:first-child > div:last-child {
-  margin-top: 20px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
+/* ─── Bottom info panels ────────────────────────────────────── */
 .links-panel,
 .disclaimer,
 .instructions-panel,
@@ -897,46 +877,29 @@ select:focus {
 
 /* ─── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 980px) {
-  .start-container > div:first-child {
-    grid-template-columns: 1fr;
-  }
-
-  .start-container > div:first-child > div:first-child,
-  .start-container > div:first-child > div:last-child {
-    padding: 22px;
-  }
-
-  .start-container > div:first-child > div:first-child > div:last-child {
-    grid-template-columns: 1fr;
+  .start-card {
+    padding: 24px;
   }
 }
 
 @media (max-width: 640px) {
-  /* phones: cards run edge to edge, no gutter around the page */
   .start-container {
-    padding: 0;
+    padding: 16px 12px;
   }
 
-  .start-container h1 {
-    font-size: 2.4rem;
-  }
-
-  .start-container > div:first-child > div:first-child,
-  .start-container > div:first-child > div:last-child {
-    border-radius: 6px;
+  .start-card {
     padding: 18px;
+  }
+
+  .start-card h1 {
+    font-size: 2.4rem;
   }
 
   #config-panel,
   .links-panel,
   .instructions-panel,
   .disclaimer,
-  .developed-by,
-  .start-container
-    > div:first-child
-    > div:first-child
-    > div:last-child
-    > div:last-child {
+  .developed-by {
     padding: 14px;
   }
 }
