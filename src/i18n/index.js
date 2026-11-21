@@ -2,45 +2,13 @@ import i18next from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 
 import en from "./locales/en.js";
-import es from "./locales/es.js";
-import ptBR from "./locales/pt-BR.js";
-import fr from "./locales/fr.js";
-import de from "./locales/de.js";
-import ru from "./locales/ru.js";
-import hi from "./locales/hi.js";
-import zhCN from "./locales/zh-CN.js";
 
 // Order of the language picker. Labels are in their own language on purpose.
-export const LANGUAGES = [
-  { code: "en", label: "English" },
-  { code: "es", label: "Español" },
-  { code: "pt-BR", label: "Português (Brasil)" },
-  { code: "fr", label: "Français" },
-  { code: "de", label: "Deutsch" },
-  { code: "ru", label: "Русский" },
-  { code: "hi", label: "हिन्दी" },
-  { code: "zh-CN", label: "简体中文" },
-];
-
-// Browsers report regional codes (es-MX, pt-PT, zh-TW…). Map them onto the
-// languages we ship; anything else falls back to English.
-function toSupported(code) {
-  const lower = String(code || "").toLowerCase();
-  if (lower.startsWith("pt")) return "pt-BR";
-  if (lower.startsWith("zh")) return "zh-CN";
-  return lower.split("-")[0];
-}
+export const LANGUAGES = [{ code: "en", label: "English" }];
 
 i18next.use(LanguageDetector).init({
   resources: {
     en: { translation: en },
-    es: { translation: es },
-    "pt-BR": { translation: ptBR },
-    fr: { translation: fr },
-    de: { translation: de },
-    ru: { translation: ru },
-    hi: { translation: hi },
-    "zh-CN": { translation: zhCN },
   },
   supportedLngs: LANGUAGES.map((l) => l.code),
   fallbackLng: "en",
@@ -54,7 +22,6 @@ i18next.use(LanguageDetector).init({
     order: ["localStorage", "navigator"],
     lookupLocalStorage: "vc-lang",
     caches: ["localStorage"],
-    convertDetectedLanguage: toSupported,
   },
 });
 
