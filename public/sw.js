@@ -38,7 +38,11 @@ self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
 self.addEventListener('fetch', event => {
     const url = new URL(event.request.url);
     const path = url.pathname;
-    if ((path.startsWith('/vcsky/') || path.startsWith('/vcbr/')) &&
+    const scopePath = new URL(self.registration.scope).pathname;
+    const gamePath = path.startsWith(scopePath)
+        ? path.slice(scopePath.length - 1)
+        : path;
+    if ((gamePath.startsWith('/vcsky/') || gamePath.startsWith('/vcbr/')) &&
         (event.request.method === 'GET' || event.request.method === 'HEAD')) {
         event.respondWith(serveFromOPFS(event.request, path));
         return;
@@ -109,7 +113,12 @@ function parseRange(rangeHeader, size) {
 async function serveFromOPFS(request, pathname) {
     try {
         const root = await navigator.storage.getDirectory();
-        const parts = pathname.replace(/^\//, '').split('/').map(decodeURIComponent);
+        const scopePath = new URL(self.registration.scope).pathname;
+        let opfsPath = pathname;
+        if (opfsPath.startsWith(scopePath)) {
+            opfsPath = opfsPath.slice(scopePath.length - 1);
+        }
+        const parts = opfsPath.replace(/^\//, '').split('/').map(decodeURIComponent);
         let dir = root;
         for (let i = 0; i < parts.length - 1; i++) {
             dir = await dir.getDirectoryHandle(parts[i]);

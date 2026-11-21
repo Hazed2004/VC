@@ -137,9 +137,9 @@ async function checkReady() {
 // Returns null if OK, or a string describing the failure reason.
 async function verifyGameServing() {
   const requiredUrls = [
-    "/vcbr/vc-sky-en-v6.data",
-    "/vcbr/vc-sky-en-v6.wasm",
-    "/vcsky/sha256sums.txt",
+    `${BASE}vcbr/vc-sky-en-v6.data`,
+    `${BASE}vcbr/vc-sky-en-v6.wasm`,
+    `${BASE}vcsky/sha256sums.txt`,
   ];
 
   try {
@@ -403,7 +403,7 @@ async function initSetupFlow() {
     setStorageStatus("status.ready", "ready");
     setPlayAvailability(true);
     progress.style.display = "none";
-    return;
+    return true;
   }
 
   setStorageStatus("status.missing", "missing");

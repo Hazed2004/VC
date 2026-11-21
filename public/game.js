@@ -7,9 +7,14 @@ var wasm_content;
 const params = new URLSearchParams(window.location.search);
 
 // Base URLs
-// The engine binary requests /vcsky/ files by absolute URL; keep them same-origin.
-const replaceFetch = (str) => str.replace(/^https?:\/\/[^/]+\/vcsky\//, "/vcsky/")
-const replaceBR = "/vcbr/"
+// Keep game asset URLs inside the app's deployed base path (for example
+// /VC/ on GitHub Pages), not at the origin root.
+const APP_BASE = new URL(".", document.baseURI).pathname;
+const replaceFetch = (str) => str.replace(
+    /^https?:\/\/[^/]+\/(?:VC\/)?vcsky\//i,
+    `${APP_BASE}vcsky/`,
+);
+const replaceBR = `${APP_BASE}vcbr/`;
 
 // Configurable mode - show settings UI before play
 const configurableMode = params.get('configurable') === "1";
