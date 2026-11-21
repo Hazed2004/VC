@@ -6,11 +6,9 @@
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
     />
-    <title>GTA: Vice City — WASM Port</title>
-    <link rel="icon" type="image/webp" href="/icon.webp" />
+    <title>Web Foundations | Learning Portal</title>
     <link rel="manifest" href="/manifest.json" />
-    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
-    <meta name="theme-color" content="#05060a" />
+    <meta name="theme-color" content="#f4f6fb" />
     <link rel="stylesheet" href="/src/style.css" />
   </head>
 
@@ -32,6 +30,72 @@
     data-state-scope-mode="0"
     data-state-scope-gun="0"
   >
+    <div id="course-gate" class="course-gate">
+      <header class="course-header">
+        <span class="course-brand">
+          <span class="course-brand-mark" aria-hidden="true">O</span>
+          <span>Open Learning</span>
+        </span>
+        <span class="course-header-label">LEARNING PORTAL</span>
+      </header>
+
+      <section class="course-layout" aria-labelledby="course-title">
+        <div class="course-intro">
+          <p class="course-eyebrow">SELF-PACED COURSE · MODULE 01</p>
+          <h1 id="course-title">Web Development<br />Essentials</h1>
+          <p class="course-description">
+            Build a strong foundation in the technologies behind the modern web.
+            Review the learning path and continue where you left off.
+          </p>
+          <div class="course-meta">
+            <span><span class="course-meta-dot"></span> 4 lessons</span>
+            <span>Beginner friendly</span>
+            <span>About 2 hours</span>
+          </div>
+        </div>
+
+        <div class="course-card">
+          <div class="course-card-heading">
+            <div>
+              <p class="course-eyebrow">YOUR LEARNING PATH</p>
+              <h2>Course overview</h2>
+            </div>
+            <span class="course-progress">0% complete</span>
+          </div>
+          <ol class="lesson-list">
+            <li><span class="lesson-number">01</span><span>How the web works</span><span class="lesson-duration">12 min</span></li>
+            <li><span class="lesson-number">02</span><span>HTML: structuring content</span><span class="lesson-duration">18 min</span></li>
+            <li><span class="lesson-number">03</span><span>CSS: styling a page</span><span class="lesson-duration">20 min</span></li>
+            <li><span class="lesson-number">04</span><span>JavaScript fundamentals</span><span class="lesson-duration">24 min</span></li>
+          </ol>
+
+          <form id="course-access-form" class="course-access-form">
+            <label for="course-access-code">Continue your course</label>
+            <div class="course-access-row">
+              <input
+                id="course-access-code"
+                name="accessCode"
+                type="password"
+                autocomplete="current-password"
+                placeholder="Enter access code"
+                aria-describedby="course-access-error"
+                required
+              />
+              <button type="submit">Continue <span aria-hidden="true">→</span></button>
+            </div>
+            <p id="course-access-error" class="course-access-error" role="alert" hidden>
+              That access code isn't correct. Please try again.
+            </p>
+          </form>
+        </div>
+      </section>
+      <footer class="course-footer">
+        <span>Open Learning</span>
+        <span>Learn something new, one lesson at a time.</span>
+      </footer>
+    </div>
+
+    <div id="game-app" hidden>
     <div class="rotate-overlay">
       <span class="rotate-overlay-icon">&#8635;</span>
       <span data-i18n="rotate">Rotate your device</span>
@@ -253,6 +317,7 @@
       <div class="touch-control horn"></div>
       <div class="touch-control fireRight"></div>
       <div class="touch-control fireLeft"></div>
+    </div>
     </div>
     <script type="module" src="/src/main.js"></script>
   </body>

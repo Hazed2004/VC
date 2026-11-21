@@ -1,12 +1,12 @@
 {
-  "name": "GTA: Vice City — WASM Port",
-  "short_name": "Vice City",
-  "description": "Play GTA: Vice City in your browser with WebAssembly. Works offline after the first import.",
+  "name": "Web Foundations | Learning Portal",
+  "short_name": "Open Learning",
+  "description": "A self-paced course for learning web development fundamentals.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#05060a",
-  "theme_color": "#05060a",
+  "background_color": "#f4f6fb",
+  "theme_color": "#f4f6fb",
   "icons": [
     {
       "src": "icons/icon-192.png",

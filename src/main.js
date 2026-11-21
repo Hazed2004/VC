@@ -509,10 +509,49 @@ function showScriptLoadError(err) {
   }
 }
 
+function initCourseAccess() {
+  const form = document.getElementById("course-access-form");
+  const input = document.getElementById("course-access-code");
+  const error = document.getElementById("course-access-error");
+  const gate = document.getElementById("course-gate");
+  const app = document.getElementById("game-app");
+  const revealApp = () => {
+    gate.hidden = true;
+    app.hidden = false;
+    void boot();
+  };
+
+  if (sessionStorage.getItem("course-access-granted") === "true") {
+    revealApp();
+    return;
+  }
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (input.value !== "gtavc") {
+      error.hidden = false;
+      input.setAttribute("aria-invalid", "true");
+      input.select();
+      return;
+    }
+
+    input.value = "";
+    sessionStorage.setItem("course-access-granted", "true");
+    revealApp();
+  });
+
+  input.addEventListener("input", () => {
+    error.hidden = true;
+    input.removeAttribute("aria-invalid");
+  });
+
+  input.focus();
+}
+
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", () => {
-    void boot();
+    initCourseAccess();
   });
 } else {
-  void boot();
+  initCourseAccess();
 }
