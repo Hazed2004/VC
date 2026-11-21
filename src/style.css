@@ -39,10 +39,20 @@
   overflow-y: auto;
   box-sizing: border-box;
   padding: 0 7vw;
-  background: #f4f6fb;
+  background:
+    radial-gradient(
+      ellipse 75% 65% at 8% 12%,
+      rgba(49, 95, 232, 0.07),
+      transparent 70%
+    ),
+    #f4f6fb;
   color: #17243b;
   text-align: left;
   user-select: text;
+}
+
+.course-gate[hidden] {
+  display: none;
 }
 
 .course-header,
@@ -78,11 +88,13 @@
   width: 34px;
   height: 34px;
   place-items: center;
-  border-radius: 10px;
-  background: #315fe8;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #315fe8, #6749d8);
   color: #fff;
-  font-size: 1.1rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.95rem;
   font-weight: 800;
+  box-shadow: 0 5px 14px rgba(49, 95, 232, 0.2);
 }
 
 .course-header-label,
@@ -185,7 +197,7 @@
 
 .lesson-list li {
   display: grid;
-  grid-template-columns: 36px 1fr auto;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
   align-items: center;
   gap: 10px;
   min-height: 52px;
